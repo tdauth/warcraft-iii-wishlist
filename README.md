@@ -194,6 +194,13 @@ native SetNavy takes boolean s returns nothing
 native PurchaseTransportShip takes nothing returns nothing
 ```
 
+* Chat API:
+
+```jass
+// returns all players who received the trigger chat message
+native GetReceivingPlayers takes nothing returns force
+```
+
 * More object data types based on game SLK files: weather effects, lightnings, ubersplats, water etc.
 
 ## Bug Fixes
