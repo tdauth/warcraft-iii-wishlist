@@ -4,7 +4,29 @@ Wishlist for the game Warcraft III: Reforged.
 
 ## Features
 
-* Advanced debugging of JASS code in maps: break points, stack traces, watching variables.
+* Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
+
+```jass
+constant playerevent EVENT_PLAYER_JOIN = ConvertPlayerEvent(xxx)
+constant mapflag MAP_ALLOW_JOINING_PLAYERS = ConvertMapFlag(xxx)
+```
+
+* Saving and loading games and changing levels in multiplayer:
+
+```jass
+native ChangeLevelSync takes player host, string newLevel returns nothing
+native LoadGameSync takes player host, string saveFileName returns
+```
+
+* Game caches in multiplayer per player:
+
+```jass
+native  ReloadGameCachesFromDiskSync takes player whichPlayer returns boolean
+native  InitGameCacheSync    takes player whichPlayer, string campaignFile returns gamecache
+native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache returns boolean
+```
+
+* Debugging of JASS code in maps: break points, stack traces, watching variables.
 * Stack traces on crashes up to the line in the JASS map script or C++ code of the game.
 * Test settings UI for the world editor which allows you to specify your game lobby and player name before testing the map.
 * More than 16 different tile and cliff types for terrain. Currently, the war3map.w3e format limits the reference to the tile and cliff type to 4 bits which means there can be only 16 different types.
@@ -12,12 +34,22 @@ Wishlist for the game Warcraft III: Reforged.
 * Remove the limit of 4 abilities per item.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
 * Allow sharing/unsharing control with single units.
+* More object data types based on game SLK files: unit sound sets, weather effects, lightnings, ubersplats, water etc.
+* Object data without level-specific data: Allow setting one single value for every level for abilities and researches to avoid big object data files with high levels. This could be controlled with a boolean flag per ability/research. It would massively improve the map loading times.
+* Custom races which are supported in the lobby, object editor, gameplay interface settings etc.
 * Allow rotation of buildings including their pathing, ground and shadow textures.
 * Add sight blockers for flying units. Currently, the occlusion height will only work for ground units.
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
 * Modify string/text fields in editor in different languages and maintaining the different war3map.wts files automatically.
 * Allow using all code from Blizzard.j and the map script in AI scripts.
+* Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
+* New research effects:
+  * Change training/upgrade/building/repair time for a specific unit type.
+  * Change stock replenish interval for a specific unit or item type.
+  * Change stock maximum for a specific unit or item type.
+
 * Add missing object data fields in JASS:
+
 ```jass
 constant itemintegerfield ITEM_IF_GOLD = ConvertItemIntegerField('igol')
 constant itemintegerfield ITEM_IF_LUMBER = ConvertItemIntegerField('xxx')
@@ -27,7 +59,7 @@ constant itemstringfield ITEM_SF_ICON = ConvertItemStringField('xxx')
 ```
 
 * Add an object data field for the ability Black Arrow which specifies the maximum target unit level. Currently, it is hard coded with the value of 5.
-* Advanced hero ability API:
+* hero ability API:
 
 ```jass
 native SetHeroAbilityLevel takes unit hero, integer abilityId, integer level returns boolean
@@ -35,6 +67,14 @@ native SetHeroAbilityLevel takes unit hero, integer abilityId, integer level ret
 native ReplaceHeroAbility takes unit hero, integer abilityId, integer newAbilityId returns boolean
 // Tome of Retraining effect
 native UnskillHero takes unit hero returns nothing
+native GetHeroSkill takes unit hero, integer index returns integer
+native GetHeroSkillCount takes unit hero returns integer
+```
+
+* Player API:
+
+```jass
+native SetPlayerRace takes player whichPlayer, race whichRace returns nothing
 ```
 
 * Unit Progress API:
@@ -96,10 +136,13 @@ native GetUnitTimedLifeBuff takes unit whichUnit returns integer
 * Buff API:
 
 ```jass
-EVENT_UNIT_BUFF_ADDED
-EVENT_UNIT_BUFF_REMOVED
+constant unitevent EVENT_UNIT_BUFF_ADDED = ConvertUnitEvent(XXX)
+constant unitevent EVENT_UNIT_BUFF_REMOVED = ConvertUnitEvent(XXX)
+constant playerunitevent EVENT_PLAYER_UNIT_BUFF_ADDED = ConvertPlayerUnitEvent(XXX)
+constant playerunitevent EVENT_PLAYER_UNIT_BUFF_REMOVED = ConvertPlayerUnitEvent(XXX)
 
 native GetTriggerBuff takes nothing returns integer
+native GetTriggerBuffSource takes nothing returns unit
 
 native AddBuff takes unit whichUnit, integer buffID returns nothing
 native RemoveBuff takes unit whichUnit, integer buffID returns nothing
@@ -108,19 +151,21 @@ native RemoveBuff takes unit whichUnit, integer buffID returns nothing
 * Selection Group API:
 
 ```jass
-EVENT_UNIT_BUFF_ADDED
-EVENT_UNIT_BUFF_REMOVED
-
-native GetTriggerBuff takes nothing returns integer
-
 native SetPlayerSelectionGroupMaximum takes player whichPlayer, integer maximum returns nothing
 native GetPlayerSelectionGroupMaximum takes player whichPlayer returns integer
+
+// Returns the index of currently focused selected unit of a player (Tab key) from the group of all selected units.
+native GetMainSelectedUnitIndex takes player whichUnit returns integer
+native SetMainSelectedUnitIndex takes player whichUnit, integer index returns nothing
+
+native GetMainSelectedUnit takes player whichUnit returns unit
+native SetMainSelectedUnit takes player whichUnit, unit u returns nothing
 ```
 
 * Missile API which allows creating missiles manually.
 * Unit and item stock API which allows setting and getting the stock values for items from shops.
 
-* Advanced destructable API:
+* Destructable/Doodad API:
 
 ```jass
 // the event stuff would be useful for items as well:
@@ -159,9 +204,11 @@ type destructablerealfield handle
 // support accessing all fields of destructables
 ```
 
+The same API could be added for Doodads.
+
 * Haunted/Entangled Gold Mines classification: Recreates a gold mine on death and is automatically used by AI.
 
-* Advanced Minimap API:
+* Minimap API:
 
 ```jass
 // changes the zoom to scale starting from the point x and y on the map
@@ -182,6 +229,8 @@ type userinterfaceconfig extends handle
 
 native SetGameplayConstant takes gameplayconstant g, real/integer/string/boolean value returns nothing
 native GetGameplayConstant takes gameplayconstant g returns real/integer/string/boolean
+
+// some can be used with GetLocalPlayer:
 native SetUserInterfaceConfig takes userinterfaceconfig g, real/integer/string/boolean value returns nothing
 native GetUserInterfaceConfig takes userinterfaceconfig g returns real/integer/string/boolean
 ```
@@ -201,7 +250,94 @@ native PurchaseTransportShip takes nothing returns nothing
 native GetReceivingPlayers takes nothing returns force
 ```
 
-* More object data types based on game SLK files: weather effects, lightnings, ubersplats, water etc.
+* Message API:
+
+```jass
+// Simulate an error message.
+native SimError takes force whichForce, string messager returns nothing
+```
+
+* Terrain API:
+
+```jass
+type terrainspecifictype extends handle
+
+native ConvertTerrainSpecificType takes integer v returns terrainspecifictype
+
+constant terrainspecifictype TERRAIN_CLIFF_TYPE_LAND = ConvertTerrainSpecificType(0)
+constant terrainspecifictype TERRAIN_CLIFF_TYPE_WATER_SHALLOW = ConvertTerrainSpecificType(1)
+constant terrainspecifictype TERRAIN_CLIFF_TYPE_WATER_DEEP = ConvertTerrainSpecificType(2)
+constant terrainspecifictype TERRAIN_CLIFF_TYPE_RAMP = ConvertTerrainSpecificType(3)
+
+native SetTerrainSpecificType takes real x, real y, terrainspecifictype t returns nothing
+native GetTerrainSpecificType takes real x, real y returns terrainspecifictype
+
+native SetTerrainCliffLevel         takes real x, real y, integer cliffLevel returns nothing
+```
+
+* Illusions API:
+
+```jass
+native CreateIllusion takes unit source, real x, real y, real facing, real duration returns unit
+native CreateIllusionById takes integer unitId, real x, real y, real facing, real duration returns unit
+
+native IllusionGetBaseUnit takes unit u returns unit
+native IllusionGetRemainingDuration takes unit u returns real
+native IllusionGetElapsedDuration takes unit u returns real
+native IllusionGetTotalDuration takes unit u returns real
+native IllusionGetDeathEffect takes unit u returns string
+native IllusionGetDamageDealtFactor takes unit u returns real
+native IllusionGetDamageTakenFactor takes unit u returns real
+
+native IllusionSetRemainingDuration takes unit u, real duration returns nothing
+native IllusionSetTotalDuration takes unit u, real duration returns nothing
+native IllusionSetDeathEffect takes unit u, string sfxpath returns nothing
+native IllusionSetDamageDealtFactor takes unit u, real factor returns nothing
+native IllusionSetDamageTakenFactor takes unit u, real factor returns nothing
+native IllusionShowTimedLifeIndicator takes unit u, boolean enabled returns nothing
+```
+
+* Ability API:
+
+```jass
+native BlzGetUnitAbilityCount takes unit whichUnit returns integer
+native BlzGetItemAbilityCount takes item whichItem returns integer
+
+
+native UnitHideAttackAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideMoveAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideStopAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideHaltAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHidePatrolAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideRallyPointAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideSelectUserAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideSelectHeroAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideHeroSkillsAbility takes unit whichUnit, boolean flag returns nothing
+native UnitHideBuildAbility takes unit whichUnit, boolean flag returns nothing
+
+// can be used with GetLocalPlayer:
+
+native SetAreaOfEffectModel takes string model returns nothing
+native SetAreaOfEffectTexture takes string texture returns nothing
+
+native SetRallyPointModel takes string model returns nothing
+native SetRallyPointTexture takes string texture returns nothing
+```
+
+* Multiboard API:
+
+```jass
+// Uses GetTriggerPlayer for the corresponding player.
+native TriggerRegisterMultiboardMinimizeEvent takes trigger whichTrigger returns event
+native GetTriggerMultiboard takes nothing returns multiboard
+```
+
+* File API:
+
+```jass
+native WriteFile takes player whichPlayer, string name, string content return boolean
+native ReadFile takes player whichPlayer, string name return string
+```
 
 ## Bug Fixes
 
@@ -214,3 +350,4 @@ native GetReceivingPlayers takes nothing returns force
 * [List of WarCraft III Crashes](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/)
 * [Request Features for JASS and the World Editor](https://www.hiveworkshop.com/threads/feedback-request-features-for-jass-and-the-world-editor.308099)
 * [UnitEventEx](https://www.hiveworkshop.com/threads/uniteventex.306289/)
+* [GetMainSelectedUnit](https://www.hiveworkshop.com/threads/getmainselectedunit.325337)
