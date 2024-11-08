@@ -42,6 +42,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
 * Modify string/text fields in editor in different languages and maintaining the different war3map.wts files automatically.
 * Allow using all code from Blizzard.j and the map script in AI scripts.
+* Support saving and loading custom campaigns as folders.
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
 * New research effects:
   * Change training/upgrade/building/repair time for a specific unit type.
@@ -344,6 +345,8 @@ native ReadFile takes player whichPlayer, string name return string
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
 * Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
 * Initialization of `region` variables leads to crashing the game on saving it.
+* Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
+* Changing all ability object data fields via JASS should work.
 
 ## Sources
 
@@ -351,3 +354,5 @@ native ReadFile takes player whichPlayer, string name return string
 * [Request Features for JASS and the World Editor](https://www.hiveworkshop.com/threads/feedback-request-features-for-jass-and-the-world-editor.308099)
 * [UnitEventEx](https://www.hiveworkshop.com/threads/uniteventex.306289/)
 * [GetMainSelectedUnit](https://www.hiveworkshop.com/threads/getmainselectedunit.325337)
+* [BlzSetAbilityRealLevelField is not working](https://www.hiveworkshop.com/threads/blzsetabilityreallevelfield-is-not-working.339882/)
+* [TasAbilityField Test](https://www.hiveworkshop.com/pastebin/b2769ab71109c3634b3115937deaa34a.24187)
