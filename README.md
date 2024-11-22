@@ -347,6 +347,8 @@ native ReadFile takes player whichPlayer, string name return string
 * Initialization of `region` variables leads to crashing the game on saving it.
 * Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
 * Changing all ability object data fields via JASS should work.
+* Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
+* Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
 
 ## Sources
 
