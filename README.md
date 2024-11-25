@@ -207,6 +207,21 @@ type destructablerealfield handle
 
 The same API could be added for Doodads.
 
+* Training Queue API:
+
+```jass
+native UnitGetTrainingQueueCount takes unit whichUnit returns integers
+native UnitCancelTrainingQueue takes unit whichUnit, integer index returns boolean
+native UnitGetTrainingQueueId takes unit whichUnit, integer index returns integer
+```
+
+* Technology API:
+
+```jass
+native GetTechIcon takes integer id, integer level returns string
+native GetTechName takes integer id, integer level returns string
+```
+
 * Haunted/Entangled Gold Mines classification: Recreates a gold mine on death and is automatically used by AI.
 
 * Minimap API:
@@ -349,6 +364,7 @@ native ReadFile takes player whichPlayer, string name return string
 * Changing all ability object data fields via JASS should work.
 * Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
+* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/).
 
 ## Sources
 
