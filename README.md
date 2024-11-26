@@ -49,6 +49,14 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
   * Change stock replenish interval for a specific unit or item type.
   * Change stock maximum for a specific unit or item type.
 
+* Object API:
+
+```jass
+native GetObjectBaseId takes integer id returns integer
+native Id2String takes integer id returns string
+native String2Id takes string source returns integer
+```
+
 * Add missing object data fields in JASS:
 
 ```jass
@@ -60,7 +68,7 @@ constant itemstringfield ITEM_SF_ICON = ConvertItemStringField('xxx')
 ```
 
 * Add an object data field for the ability Black Arrow which specifies the maximum target unit level. Currently, it is hard coded with the value of 5.
-* hero ability API:
+* Hero ability API:
 
 ```jass
 native SetHeroAbilityLevel takes unit hero, integer abilityId, integer level returns boolean
@@ -123,15 +131,15 @@ native GetUnitTimedLifeBuff takes unit whichUnit returns integer
 * More unit events:
 
 ```jass
-    EVENT_ON_TRANSFORM
-    EVENT_ON_CARGO_LOAD
-    EVENT_ON_CARGO_UNLOAD
-    EVENT_ON_RESURRECTION
-    EVENT_ON_ANIMATE_DEAD
-    EVENT_ON_REINCARNATION_START
-    EVENT_ON_REINCARNATION_FINISH
-    EVENT_UNIT_DECAYED
-    EVENT_UNIT_EXPLODED
+EVENT_ON_TRANSFORM
+EVENT_ON_CARGO_LOAD
+EVENT_ON_CARGO_UNLOAD
+EVENT_ON_RESURRECTION
+EVENT_ON_ANIMATE_DEAD
+EVENT_ON_REINCARNATION_START
+EVENT_ON_REINCARNATION_FINISH
+EVENT_UNIT_DECAYED
+EVENT_UNIT_EXPLODED
 ```
 
 * Buff API:
