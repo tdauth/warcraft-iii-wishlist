@@ -44,6 +44,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow using all code from Blizzard.j and the map script in AI scripts.
 * Support saving and loading custom campaigns as folders.
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
+* Message Log in multiplayer: Only supported by a [custom system](https://www.hiveworkshop.com/threads/barad%C3%A9s-log-1-0.356932/).
 * New research effects:
   * Change training/upgrade/building/repair time for a specific unit type.
   * Change stock replenish interval for a specific unit or item type.
