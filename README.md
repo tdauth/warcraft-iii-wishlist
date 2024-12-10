@@ -364,6 +364,55 @@ native WriteFile takes player whichPlayer, string name, string content return bo
 native ReadFile takes player whichPlayer, string name return string
 ```
 
+
+* Frame API:
+
+```jass
+// All can be used GetLocalPlayer for specific players only.
+native SetFramePortraitModel takes string model returns nothing
+native GetFramePortraitModel takes nothing returns string
+native SetFramePortraitCamera takes integer index returns nothing
+native SetFramePortraitAnimation takes integer index returns nothing
+native SetFramePortraitTeamColor takes playercolor whichColor returns nothing
+```
+
+* Unit Sound Set API:
+
+
+
+* Player Information API:
+
+```jass
+native GetPlayerPing takes player whichPlayer returns integer
+native GetPlayerFps takes player whichPlayer returns integer
+// Returns the locale configured for Warcraft III.
+// Like BlzGetLocale but already synchronized.
+native GetPlayerLocale takes player whichPlayer returns string
+
+native GetLocalizedStringEx takes string source, string locale returns string
+native GetLocalizedHotkeyEx takes string source, string locale returns integer
+```
+
+* Calendar API:
+
+```jass
+type timestamp extends handle
+
+// Return's a players current local timestamp containing time zone information (automaticall synchronizes).
+// Returns the host's current timestamp if the player is not a user.
+native GetPlayerTimeStamp takes player whichPlayer returns timestamp
+native GetTimeStampYear takes timestamp t returns integer
+native GetTimeStampMonth takes timestamp t returns integer
+native GetTimeStampDay takes timestamp t returns integer
+native GetTimeStampHour takes timestamp t returns integer
+native GetTimeStampMinute takes timestamp t returns integer
+native GetTimeStampSecond takes timestamp t returns integer
+native GetTimeStampMillisecond takes timestamp t returns integer
+native GetTimeStampTimeZone takes timestamp t returns integer
+native TimeStamp2ISO takes timestamp t returns string
+native ISO2TimeStamp takes string iso returns timestamp
+```
+
 ## Bug Fixes
 
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
