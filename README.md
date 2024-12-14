@@ -45,6 +45,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Support saving and loading custom campaigns as folders.
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
 * Message Log in multiplayer: Only supported by a [custom system](https://www.hiveworkshop.com/threads/barad%C3%A9s-log-1-0.356932/).
+* Tiny Item abilities should get flags to check building limits and dependencies and if enabled disallow placing buildings if the conditions do not match.
 * New research effects:
   * Change training/upgrade/building/repair time for a specific unit type.
   * Change stock replenish interval for a specific unit or item type.
