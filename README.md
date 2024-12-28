@@ -45,7 +45,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Support saving and loading custom campaigns as folders.
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
 * Message Log in multiplayer: Only supported by a [custom system](https://www.hiveworkshop.com/threads/barad%C3%A9s-log-1-0.356932/).
-* Tiny Item abilities should get flags to check building limits and dependencies and if enabled disallow placing buildings if the conditions do not match.
+* Tiny Item abilities should get flags to check building limits and dependencies and if enabled disallow placing buildings if the requirements are not fulfilled. The requirements could be listed in the tooltip if they are not fulfilled.
 * New research effects:
   * Change training/upgrade/building/repair time for a specific unit type.
   * Change stock replenish interval for a specific unit or item type.
@@ -190,7 +190,12 @@ constant destructableevent EVENT_DESTRUCTABLE_DESELECTED                        
 constant native GetTriggerDestructable takes nothing returns destructable
 constant native GetRestoredDestructableLife takes nothing returns real
 
+native TriggerRegisterDestructableEvent takes trigger whichTrigger, destructable d, destructableevent e returns nothing
+native TriggerRegisterAnyDestructableEvent takes trigger whichTrigger, destructableevent e returns nothing
+
 // some useful natives
+native SetDestructableFace takes destructable d, real face returns nothing
+native GetDestructableFace takes destructable d returns real
 native SetDestructableX takes destructable d, real x returns nothing
 native SetDestructableY takes destructable d, real y returns nothing
 native SetDestructableZ takes destructable d, real z returns nothing
@@ -214,6 +219,8 @@ native SetDestructableTargetedAs takes destructable d, targetflag t, boolean fla
 type destructablerealfield handle
 // support accessing all fields of destructables
 ```
+
+`GetKillingUnit` and `GetEventDamageSource` should work for the destructable events.
 
 The same API could be added for Doodads.
 
