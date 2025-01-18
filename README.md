@@ -50,6 +50,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
   * Change training/upgrade/building/repair time for a specific unit type.
   * Change stock replenish interval for a specific unit or item type.
   * Change stock maximum for a specific unit or item type.
+* Allow specifying more model properties in object data like texture paths. This would allow users to use different skins more easily with existing models imported only once. It is already possible with replaceable textures for destructables but a list of texture paths would be better especially for units, heroes and buildings.
 
 * Object API:
 
@@ -240,6 +241,15 @@ native GetTechName takes integer id, integer level returns string
 ```
 
 * Haunted/Entangled Gold Mines classification: Recreates a gold mine on death and is automatically used by AI.
+* AI API:
+
+```jass
+native SetBuyItem           takes integer qty, integer id, integer hero returns boolean
+// the AI will only purchase mercenaries which have been configured by SetProduce if enabled.
+native SetPurchaseMercenaries    takes boolean state                         returns nothing
+// Attacks all crates, gates etc. if enabled.
+native SetAttackCrates  takes boolean state                         returns nothing
+```
 
 * Minimap API:
 
@@ -431,6 +441,9 @@ native ISO2TimeStamp takes string iso returns timestamp
 * Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
 * Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/).
+* Fix function `BlzGroupAddGroupFast`.
+* Fix AI scripts crashing when the AI has too little space to build its base.
+* Fix AI scripts crashing when the AI starts next to waygates or has to use them.
 
 ## Sources
 
