@@ -40,6 +40,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow rotation of buildings including their pathing, ground and shadow textures.
 * Add sight blockers for flying units. Currently, the occlusion height will only work for ground units.
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
+* New boolean flag for unit types to enable hero glow.
 * Modify string/text fields in editor in different languages and maintaining the different war3map.wts files automatically.
 * Allow using all code from Blizzard.j and the map script in AI scripts.
 * Support saving and loading custom campaigns as folders.
@@ -444,6 +445,7 @@ native ISO2TimeStamp takes string iso returns timestamp
 * Fix function `BlzGroupAddGroupFast`.
 * Fix AI scripts crashing when the AI has too little space to build its base.
 * Fix AI scripts crashing when the AI starts next to waygates or has to use them.
+* Fix `GetUnitGoldCost` and `GetUnitWoodCost` crashing the game when used with IDs of hero unit types.
 
 ## Sources
 
