@@ -28,6 +28,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 
 * Debugging of JASS code in maps: break points, stack traces, watching variables.
 * Stack traces on crashes up to the line in the JASS map script or C++ code of the game.
+* World Editor should allow saving the map not only as folder but binary file formats as text files JSON, XML or some similar format. Binary formats should only be used when checking check boxes on saving the map. This would massively help maintaining GIT repositories and seeing diffs of files. This could even include MDL and MDX files. Every war3map.xxx file could have a corresponding text file like war3map.w3e -> war3map_w3e.json
 * Test settings UI for the world editor which allows you to specify your game lobby and player name before testing the map.
 * More than 16 different tile and cliff types for terrain. Currently, the war3map.w3e format limits the reference to the tile and cliff type to 4 bits which means there can be only 16 different types.
 * Remove the limit of 5 hero abilities per hero.
@@ -42,6 +43,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
 * New boolean flag for unit types to enable hero glow.
 * Modify string/text fields in editor in different languages and maintaining the different war3map.wts files automatically.
+* Referencing strings from FDF files in object data instead of generating new translatable strings into the war3map.wts file. Basically the same as `GetLocalizedString` and `GetLocalizedHotkey` but in the object editor.
 * Allow using all code from Blizzard.j and the map script in AI scripts.
 * Support saving and loading custom campaigns as folders.
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
@@ -446,6 +448,14 @@ native ISO2TimeStamp takes string iso returns timestamp
 * Fix AI scripts crashing when the AI has too little space to build its base.
 * Fix AI scripts crashing when the AI starts next to waygates or has to use them.
 * Fix `GetUnitGoldCost` and `GetUnitWoodCost` crashing the game when used with IDs of hero unit types.
+* Strings from research effects end up in the file war3map.wts where they do not belong:
+```
+STRING 3882
+// Upgrades: R0CI (Brute Strength), effect1 (Effect 1)
+{
+rmvx
+}
+```
 
 ## Sources
 
