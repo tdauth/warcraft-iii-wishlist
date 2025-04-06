@@ -289,6 +289,8 @@ native SetNavy takes boolean s returns nothing
 native PurchaseTransportShip takes nothing returns nothing
 ```
 
+The AI should be able to attack locations reachable from the water with their navy and transport units to isles if no zeppelin is available but a reachable transport ship.
+
 * Chat API:
 
 ```jass
