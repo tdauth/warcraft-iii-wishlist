@@ -37,7 +37,14 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow sharing/unsharing control with single units.
 * More object data types based on game SLK files: unit sound sets, weather effects, lightnings, ubersplats, water etc.
 * Object data without level-specific data: Allow setting one single value for every level for abilities and researches to avoid big object data files with high levels. This could be controlled with a boolean flag per ability/research. It would massively improve the map loading times.
-* Custom races which are supported in the lobby, object editor, gameplay interface settings etc.
+* Custom races which are supported in the lobby, object editor, gameplay interface settings etc. There could be race map file like war3mapRaces.txt which contains this information about all races:
+```
+[Goblin] // Folder name in the UI folder and used for all assets.
+Name=Goblin // Name shown in the lobby. Can refer a string from war3map.wts and FDF StringLists.
+
+[Dwarf]
+Name=TRIGSTR_1171
+```
 * Allow rotation of buildings including their pathing, ground and shadow textures.
 * Add sight blockers for flying units. Currently, the occlusion height will only work for ground units.
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
