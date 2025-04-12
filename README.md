@@ -77,6 +77,12 @@ constant itemintegerfield ITEM_IF_GOLD = ConvertItemIntegerField('igol')
 constant itemintegerfield ITEM_IF_LUMBER = ConvertItemIntegerField('xxx')
 constant itemstringfield ITEM_SF_ICON = ConvertItemStringField('xxx')
 
+type techstringlevelfield extends handle
+
+constant techstringlevelfield TECH_SF_LEVEL_ICON = ConvertTechStringLevelField('gar1')
+
+native BlzGetTechStringLevelField takes integer id, techstringlevelfield whichField, integer level returns string
+
 // Allow access and changes of all build time fields (object editor). They aren't listed in the trigger actions etc.
 ```
 
@@ -465,6 +471,8 @@ STRING 3882
 rmvx
 }
 ```
+* war3mapMisc.txt entries like TWN1 cannot use translatable strings.
+* Starfall buff effect cannot be changed ([source](https://www.hiveworkshop.com/threads/starfall-effect-not-changing.332390/)).
 
 ## Sources
 
