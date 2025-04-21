@@ -61,6 +61,7 @@ Name=TRIGSTR_1171
   * Change stock replenish interval for a specific unit or item type.
   * Change stock maximum for a specific unit or item type.
 * Allow specifying more model properties in object data like texture paths. This would allow users to use different skins more easily with existing models imported only once. It is already possible with replaceable textures for destructables but a list of texture paths would be better especially for units, heroes and buildings.
+* Health bar for destructables in Reforged like it used to be in Frozen Throne.
 
 * Object API:
 
@@ -473,6 +474,13 @@ rmvx
 ```
 * war3mapMisc.txt entries like TWN1 cannot use translatable strings.
 * Starfall buff effect cannot be changed ([source](https://www.hiveworkshop.com/threads/starfall-effect-not-changing.332390/)).
+* Fix dependency equivalents using the same object data ID lead to crashes when buildings training them are selected. The crash is probably caused by some endless loop.
+
+## JassHelper
+
+* JassHelper changes the number of underscores for generated identifiers when saving the map. This will lead to bigger diffs in git than necessary and make it harder to see actual changes in the generated map scripts.
+* JassHelper does not remove empty lines between static ifs which are false which makes the generated map script longer than necessary.
+* JassHelper should have an option to not generated JASS comments into the generated map script to keep it smaller.
 
 ## Sources
 
