@@ -512,7 +512,7 @@ native ISO2TimeStamp takes string iso returns timestamp
 * Changing all ability object data fields via JASS should work.
 * Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
-* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/).
+* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
 * Fix function `BlzGroupAddGroupFast`.
 * Fix AI scripts crashing when the AI has too little space to build its base.
 * Fix AI scripts crashing when the AI starts next to waygates or has to use them.
