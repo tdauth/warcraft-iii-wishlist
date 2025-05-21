@@ -151,6 +151,14 @@ native SetPlayerRace takes player whichPlayer, race whichRace returns nothing
 
 This should change the UI and sound effects etc.
 
+* Training Queue API:
+
+```jass
+native UnitGetTrainingQueueCount takes unit whichUnit returns integers
+native UnitCancelTrainingQueue takes unit whichUnit, integer index returns boolean
+native UnitGetTrainingQueueId takes unit whichUnit, integer index returns integer
+```
+
 * Unit Progress API:
 
 ```jass
@@ -286,14 +294,6 @@ type destructablerealfield handle
 `GetKillingUnit` and `GetEventDamageSource` should work for the destructable events.
 
 The same API could be added for Doodads.
-
-* Training Queue API:
-
-```jass
-native UnitGetTrainingQueueCount takes unit whichUnit returns integers
-native UnitCancelTrainingQueue takes unit whichUnit, integer index returns boolean
-native UnitGetTrainingQueueId takes unit whichUnit, integer index returns integer
-```
 
 * Technology API:
 
