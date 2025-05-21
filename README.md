@@ -37,7 +37,8 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow sharing/unsharing control with single units.
 * More object data types based on game SLK files: unit sound sets, weather effects, lightnings, ubersplats, water etc.
 * Object data without level-specific data: Allow setting one single value for every level for abilities and researches to avoid big object data files with high levels. This could be controlled with a boolean flag per ability/research. It would massively improve the map loading times.
-* Custom races which are supported in the lobby, object editor, gameplay interface settings etc. There could be race map file like war3mapRaces.txt which contains this information about all races:
+* Custom races which are supported in the lobby, object editor, gameplay interface settings etc. There could be race map file like `war3mapRaces.txt` which contains this information about all races:
+
 ```
 [Goblin] // Folder name in the UI folder and used for all assets.
 Name=Goblin // Name shown in the lobby. Can refer a string from war3map.wts and FDF StringLists.
@@ -45,14 +46,24 @@ Name=Goblin // Name shown in the lobby. Can refer a string from war3map.wts and 
 [Dwarf]
 Name=TRIGSTR_1171
 ```
+
 * Allow rotation of buildings including their pathing, ground and shadow textures.
 * Add sight blockers for flying units. Currently, the occlusion height will only work for ground units.
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
 * New boolean flag for unit types to enable hero glow.
 * Modify string/text fields in editor in different languages and maintaining the different war3map.wts files automatically.
 * Referencing strings from FDF files in object data instead of generating new translatable strings into the war3map.wts file. Basically the same as `GetLocalizedString` and `GetLocalizedHotkey` but in the object editor.
-* Allow using all code from Blizzard.j and the map script in AI scripts.
-* Support saving and loading custom campaigns as folders.
+* Allow more custom script files to be imported and used by custom trigger scripts. The files could be specified in the file `war3mapExtra.txt``where their loading order is defined:
+
+```
+[CustomScripts]
+CustomScriptsCount=2
+CustomScript0=scripts/mycustomscript.j
+CustomScript1=scripts/mycustomscript2.j
+```
+
+* Allow using all code from Blizzard.j and the map script in AI scripts and not only from common.j and common.ai.
+* Support saving and loading custom campaigns as folders in the World Editor's Campaign Editor (just like for maps).
 * Team colored icons: Some pixel flag/placeholder in icons should be for the unit's team color and filled with it.
 * Message Log in multiplayer: Only supported by a [custom system](https://www.hiveworkshop.com/threads/barad%C3%A9s-log-1-0.356932/).
 * Tiny Item abilities should get flags to check building limits and dependencies and if enabled disallow placing buildings if the requirements are not fulfilled. The requirements could be listed in the tooltip if they are not fulfilled.
@@ -63,6 +74,37 @@ Name=TRIGSTR_1171
 * Allow specifying more model properties in object data like texture paths. This would allow users to use different skins more easily with existing models imported only once. It is already possible with replaceable textures for destructables but a list of texture paths would be better especially for units, heroes and buildings.
 * Health bar for destructables in Reforged like it used to be in Frozen Throne.
 * The Channel ability should get an option to be auto cast or not. This would help to create custom auto cast spells.
+* Support multiple game versions by version checks at runtime:
+
+```jass
+constant native GetMajorVersion takes nothing returns integer
+constant native GetMinorVersion takes nothing returns integer
+constant native GetPatchVersion takes nothing returns integer
+// For natives, functions, constants and global variables.
+constant native SupportsIdentifier takes string name returns boolean
+```
+
+The user can declare any native even if it is not supported by the game version.
+Having a native or identifier which is not supported by the game should not directly lead to not being able to start a map.
+It should only be checked during runtime.
+Not existing identifiers should have no effect at all and return default values depending on their declared type return type.
+`null` for handles, `0` for reals, and `""` for strings.
+Nothing is done if the return type is `nothing`.
+Default behavior could be overwritten with a new `default` keyword which could lead to a custom user-defined function:
+
+```
+function BlzSetUnitSkinUserDefined takes unit whichUnit, integer skinId returns nothing
+  // alternative behavior
+endfunction
+
+function BlzGetUnitSkinUserDefined takes unit whichUnit returns integer
+  // alternative behavior
+  return 0
+endfunction
+
+native BlzSetUnitSkin takes unit whichUnit, integer skinId returns nothing default BlzSetUnitSkinUserDefined
+native BlzGetUnitSkin takes unit whichUnit returns integer default BlzGetUnitSkinUserDefined
+```
 
 * Object API:
 
@@ -106,6 +148,8 @@ native GetHeroSkillCount takes unit hero returns integer
 ```jass
 native SetPlayerRace takes player whichPlayer, race whichRace returns nothing
 ```
+
+This should change the UI and sound effects etc.
 
 * Unit Progress API:
 
@@ -262,11 +306,11 @@ native GetTechName takes integer id, integer level returns string
 * AI API:
 
 ```jass
-native SetBuyItem           takes integer qty, integer id, integer hero returns boolean
+native SetBuyItem takes integer qty, integer id, integer hero returns boolean
 // the AI will only purchase mercenaries which have been configured by SetProduce if enabled.
-native SetPurchaseMercenaries    takes boolean state                         returns nothing
+native SetPurchaseMercenaries takes boolean state returns nothing
 // Attacks all crates, gates etc. if enabled.
-native SetAttackCrates  takes boolean state                         returns nothing
+native SetAttackCrates takes boolean state returns nothing
 ```
 
 * Minimap API:
@@ -416,7 +460,16 @@ native SetFramePortraitTeamColor takes playercolor whichColor returns nothing
 
 * Unit Sound Set API:
 
+```jass
+native GetUnitSoundSet takes unit whichUnit returns string
+native SetUnitSoundSet takes unit whichUnit, string soundName returns nothing
+native GetUnitSoundRandom takes unit whichUnit returns string
+native SetUnitSoundRandom takes unit whichUnit, string soundName returns nothing
+native GetUnitSoundMovement takes unit whichUnit returns string
+native SetUnitSoundMovement takes unit whichUnit, string soundName returns nothing
+```
 
+This has not the highest priority since something like this can be achieved by setting a unit's skin.
 
 * Player Information API:
 
@@ -451,6 +504,12 @@ native TimeStamp2ISO takes timestamp t returns string
 native ISO2TimeStamp takes string iso returns timestamp
 ```
 
+* Group API:
+
+```jass
+native GetClosestUnit takes group g, real x, real y returns unit
+```
+
 ## Bug Fixes
 
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
@@ -460,7 +519,7 @@ native ISO2TimeStamp takes string iso returns timestamp
 * Changing all ability object data fields via JASS should work.
 * Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
-* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/).
+* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
 * Fix function `BlzGroupAddGroupFast`.
 * Fix AI scripts crashing when the AI has too little space to build its base.
 * Fix AI scripts crashing when the AI starts next to waygates or has to use them.
@@ -478,6 +537,7 @@ rmvx
 * Fix dependency equivalents using the same object data ID lead to crashes when buildings training them are selected. The crash is probably caused by some endless loop.
 * Fix crashes and performance issues with pathing in big maps ([source](https://www.hiveworkshop.com/threads/suicideonplayer-crashes-the-game-on-reforged-only-on-some-maps.359199/)).
 * Fix automatic deselections in multiplayer which might occur when selected unit groups are determined in trigger conditions ([source](https://www.hiveworkshop.com/threads/selection-bug.312500/)).
+* Fix summon event for ability Pocket Factory ([source](https://www.hiveworkshop.com/threads/how-do-you-detect-a-pocket-factory-summon.330032/)). Summoned Pocket Factories and Clockwerk Goblins are not detected by the summon event.
 
 ## JassHelper
 
