@@ -446,7 +446,6 @@ native WriteFile takes player whichPlayer, string name, string content return bo
 native ReadFile takes player whichPlayer, string name return string
 ```
 
-
 * Frame API:
 
 ```jass
@@ -508,6 +507,27 @@ native ISO2TimeStamp takes string iso returns timestamp
 
 ```jass
 native GetClosestUnit takes group g, real x, real y returns unit
+```
+
+* Harvest API:
+
+```jass
+EVENT_PLAYER_UNIT_HARVEST_GOLD
+EVENT_PLAYER_UNIT_HARVEST_LUMBER
+EVENT_PLAYER_UNIT_RETURN_GOLD
+EVENT_PLAYER_UNIT_RETURN_LUMBER
+
+native GetTriggerHarvestAmount takes nothing returns integer
+native GetTriggerHarvestMine takes nothing returns unit
+native GetTriggerHarvestTree takes nothing returns destructable
+
+native GetTriggerReturnAmount takes nothing returns integer
+native GetTriggerReturnBuilding takes nothing returns unit
+
+native GetUnitHarvestGold takes unit whichUnit returns integer
+native GetUnitHarvestLumber takes unit whichUnit returns integer
+native SetUnitHarvestGold takes unit whichUnit, integer amount returns nothing
+native SetUnitHarvestLumber takes unit whichUnit, integer amount returns nothing
 ```
 
 ## Bug Fixes
