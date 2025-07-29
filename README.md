@@ -2,6 +2,48 @@
 
 Wishlist for the game Warcraft III: Reforged.
 
+## Motivation
+
+Unfortunately, the community has no access to the source code of the game.
+There are a lot of things which need to be fixed and a lot of features the game is lacking.
+This list can help to document all of this.
+It might help people who have access to the source code of the game and are involved in its development to improve the game which will attract new players to the game and be benefitial for the company selling the game as well as the community creating content for it and playing it.
+
+## Contribute
+
+Feel free to create issues and pull requests for this repository on GitHub.
+
+## Bug Fixes
+
+* framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
+* Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
+* Initialization of `region` variables leads to crashing the game on saving it.
+* Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
+* Changing all ability object data fields via JASS should work.
+* Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
+* Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
+* Fix the function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
+* Fix the function `BlzGroupAddGroupFast`. It does not add the given unit to the given group.
+* Fix AI scripts crashing when the AI has too little space to build its base.
+* Fix AI scripts crashing when the AI starts next to waygates or has to use them.
+* Fix `GetUnitGoldCost` and `GetUnitWoodCost` crashing the game when used with IDs of hero unit types.
+* Strings from research effects end up in the file war3map.wts where they do not belong:
+```
+STRING 3882
+// Upgrades: R0CI (Brute Strength), effect1 (Effect 1)
+{
+rmvx
+}
+```
+* war3mapMisc.txt entries like TWN1 cannot use translatable strings.
+* Starfall buff effect cannot be changed ([source](https://www.hiveworkshop.com/threads/starfall-effect-not-changing.332390/)).
+* Fix dependency equivalents using the same object data ID lead to crashes when buildings training them are selected. The crash is probably caused by some endless loop.
+* Fix crashes and performance issues with pathing in big maps ([source](https://www.hiveworkshop.com/threads/suicideonplayer-crashes-the-game-on-reforged-only-on-some-maps.359199/)).
+* Fix automatic deselections in multiplayer which might occur when selected unit groups are determined in trigger conditions ([source](https://www.hiveworkshop.com/threads/selection-bug.312500/)).
+* Fix summon event for ability Pocket Factory ([source](https://www.hiveworkshop.com/threads/how-do-you-detect-a-pocket-factory-summon.330032/)). Summoned Pocket Factories and Clockwerk Goblins are not detected by the summon event.
+* Fix changing unit icons when changing their skin with `BlzSetUnitSkin`. At the moment you have to change the owner of the unit to fix the icon.
+* `SetTerrainTypeBJ` has no effect if Reforged graphics are enabled ([source](https://github.com/tdauth/warcraft-iii-wishlist/issues/4)).
+
 ## Features
 
 * Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
@@ -28,7 +70,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 
 * Debugging of JASS code in maps: break points, stack traces, watching variables.
 * Stack traces on crashes up to the line in the JASS map script or C++ code of the game.
-* World Editor should allow saving the map not only as folder but binary file formats as text files JSON, XML or some similar format. Binary formats should only be used when checking check boxes on saving the map. This would massively help maintaining GIT repositories and seeing diffs of files. This could even include MDL and MDX files. Every war3map.xxx file could have a corresponding text file like war3map.w3e -> war3map_w3e.json
+* The World Editor should allow saving the map not only as folder but binary file formats as text files JSON, XML or some similar format. Binary formats should only be used when checking check boxes on saving the map. This would massively help maintaining version control repositories and seeing diffs of files. This could even include MDL and MDX files. Every war3map.xxx file could have a corresponding text file like war3map.w3e -> war3map_w3e.json There is already the community driven project [WC3MapTranslator](https://github.com/ChiefOfGxBxL/WC3MapTranslator) but native support by the World Editor would be more convenient.
 * Test settings UI for the world editor which allows you to specify your game lobby and player name before testing the map.
 * More than 16 different tile and cliff types for terrain. Currently, the war3map.w3e format limits the reference to the tile and cliff type to 4 bits which means there can be only 16 different types.
 * Remove the limit of 5 hero abilities per hero.
@@ -243,6 +285,9 @@ native SetMainSelectedUnitIndex takes player whichUnit, integer index returns no
 native GetMainSelectedUnit takes player whichUnit returns unit
 native SetMainSelectedUnit takes player whichUnit, unit u returns nothing
 ```
+
+This API would allow players to select more than 12 units at once.
+The UI would need some adaptions to show more than 12 unit icons at once.
 
 * Missile API which allows creating missiles manually.
 * Unit and item stock API which allows setting and getting the stock values for items from shops.
@@ -529,36 +574,6 @@ native GetUnitHarvestLumber takes unit whichUnit returns integer
 native SetUnitHarvestGold takes unit whichUnit, integer amount returns nothing
 native SetUnitHarvestLumber takes unit whichUnit, integer amount returns nothing
 ```
-
-## Bug Fixes
-
-* framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
-* Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
-* Initialization of `region` variables leads to crashing the game on saving it.
-* Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
-* Changing all ability object data fields via JASS should work.
-* Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
-* Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
-* Fix function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
-* Fix function `BlzGroupAddGroupFast`.
-* Fix AI scripts crashing when the AI has too little space to build its base.
-* Fix AI scripts crashing when the AI starts next to waygates or has to use them.
-* Fix `GetUnitGoldCost` and `GetUnitWoodCost` crashing the game when used with IDs of hero unit types.
-* Strings from research effects end up in the file war3map.wts where they do not belong:
-```
-STRING 3882
-// Upgrades: R0CI (Brute Strength), effect1 (Effect 1)
-{
-rmvx
-}
-```
-* war3mapMisc.txt entries like TWN1 cannot use translatable strings.
-* Starfall buff effect cannot be changed ([source](https://www.hiveworkshop.com/threads/starfall-effect-not-changing.332390/)).
-* Fix dependency equivalents using the same object data ID lead to crashes when buildings training them are selected. The crash is probably caused by some endless loop.
-* Fix crashes and performance issues with pathing in big maps ([source](https://www.hiveworkshop.com/threads/suicideonplayer-crashes-the-game-on-reforged-only-on-some-maps.359199/)).
-* Fix automatic deselections in multiplayer which might occur when selected unit groups are determined in trigger conditions ([source](https://www.hiveworkshop.com/threads/selection-bug.312500/)).
-* Fix summon event for ability Pocket Factory ([source](https://www.hiveworkshop.com/threads/how-do-you-detect-a-pocket-factory-summon.330032/)). Summoned Pocket Factories and Clockwerk Goblins are not detected by the summon event.
-* Fix changing unit icons when changing their skin with `BlzSetUnitSkin`. At the moment you have to change the owner of the unit to fix the icon.
 
 ## JassHelper
 
