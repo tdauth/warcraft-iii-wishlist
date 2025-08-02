@@ -43,6 +43,7 @@ rmvx
 * Fix summon event for ability Pocket Factory ([source](https://www.hiveworkshop.com/threads/how-do-you-detect-a-pocket-factory-summon.330032/)). Summoned Pocket Factories and Clockwerk Goblins are not detected by the summon event.
 * Fix changing unit icons when changing their skin with `BlzSetUnitSkin`. At the moment you have to change the owner of the unit to fix the icon.
 * `SetTerrainTypeBJ` has no effect if Reforged graphics are enabled ([source](https://github.com/tdauth/warcraft-iii-wishlist/issues/4)).
+* Fix SLK and TXT files being able to handle abilities and upgrades with more than 4 levels ([source](https://www.hiveworkshop.com/threads/abilitydata-slk-help.268472/#post-2715115)).
 
 ## Features
 
@@ -77,6 +78,23 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Remove the limit of 4 abilities per item.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
 * Allow sharing/unsharing control with single units.
+* Allow loading custom SLK and TXT files per map even when clicking on the map in the lobby. This would allow defining custom object data not based on default object data but with complete custom IDs and strings there instead of the war3map.wts files or even complete object data sets. There could be a special file which is called war3mapLoadFiles.txt which contains user defined entries like
+
+```
+UI\LobbyStrings.txt
+Units\DemonUnitStrings.txt
+Units\DemonItemData.slk
+```
+
+There could be an API to load those files during the game:
+
+```
+native LoadTxt takes string filePath returns boolean
+native LoadSlk takes string filePath returns boolean
+native HasFile takes string filePath returns boolean
+native HasDir takes string dirPath returns boolean
+```
+
 * More object data types based on game SLK files: unit sound sets, weather effects, lightnings, ubersplats, water etc.
 * Object data without level-specific data: Allow setting one single value for every level for abilities and researches to avoid big object data files with high levels. This could be controlled with a boolean flag per ability/research. It would massively improve the map loading times.
 * Custom races which are supported in the lobby, object editor, gameplay interface settings etc. There could be race map file like `war3mapRaces.txt` which contains this information about all races:
