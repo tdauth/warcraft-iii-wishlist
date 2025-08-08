@@ -24,6 +24,7 @@ Feel free to create issues and pull requests for this repository on GitHub.
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
 * Fix the function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
 * Fix the function `BlzGroupAddGroupFast`. It does not add the given unit to the given group.
+* Fix `ITEM_BF_INCLUDE_AS_RANDOM_CHOICE` always returning false in the call `BlzGetItemBooleanField(whichItem, ITEM_BF_INCLUDE_AS_RANDOM_CHOICE)` ([source](https://github.com/tdauth/warcraft-iii-wishlist/issues/5)).
 * Fix AI scripts crashing when the AI has too little space to build its base.
 * Fix AI scripts crashing when the AI starts next to waygates or has to use them.
 * Fix `GetUnitGoldCost` and `GetUnitWoodCost` crashing the game when used with IDs of hero unit types.
