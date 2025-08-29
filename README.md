@@ -135,6 +135,7 @@ CustomScript1=scripts/mycustomscript2.j
 * Allow specifying more model properties in object data like texture paths. This would allow users to use different skins more easily with existing models imported only once. It is already possible with replaceable textures for destructables but a list of texture paths would be better especially for units, heroes and buildings.
 * Health bar for destructables in Reforged like it used to be in Frozen Throne.
 * The Channel ability should get an option to be auto cast or not. This would help to create custom auto cast spells.
+* Let raw code object IDs like `'hfot'` be longer than 4 letters to make them more expressive: `'footman'`.
 * Support multiple game versions by version checks at runtime:
 
 ```jass
