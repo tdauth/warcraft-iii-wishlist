@@ -46,6 +46,12 @@ rmvx
 * `SetTerrainTypeBJ` has no effect if Reforged graphics are enabled ([source](https://github.com/tdauth/warcraft-iii-wishlist/issues/4)).
 * Fix SLK and TXT files being able to handle abilities and upgrades with more than 4 levels ([source](https://www.hiveworkshop.com/threads/abilitydata-slk-help.268472/#post-2715115)).
 
+* Add missing object data field types to common.j:
+
+```jass
+constant abilityintegerlevelfield ABILITY_ILF_MAXIMUM_CREEP_LEVEL_NDO2     = ConvertAbilityIntegerLevelField('Ndo2')
+```
+
 ## Features
 
 * Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
@@ -74,7 +80,8 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Stack traces on crashes up to the line in the JASS map script or C++ code of the game.
 * The World Editor should allow saving the map not only as folder but binary file formats as text files JSON, XML or some similar format. Binary formats should only be used when checking check boxes on saving the map. This would massively help maintaining version control repositories and seeing diffs of files. This could even include MDL and MDX files. Every war3map.xxx file could have a corresponding text file like war3map.w3e -> war3map_w3e.json There is already the community driven project [WC3MapTranslator](https://github.com/ChiefOfGxBxL/WC3MapTranslator) but native support by the World Editor would be more convenient.
 * Test settings UI for the world editor which allows you to specify your game lobby and player name before testing the map.
-* More than 16 different tile and cliff types for terrain. Currently, the war3map.w3e format limits the reference to the tile and cliff type to 4 bits which means there can be only 16 different types.
+* Allow more than 16 different tile and cliff types for terrain. Currently, the war3map.w3e format limits the reference to the tile and cliff type to 4 bits which means there can be only 16 different types. This has been changed with [Patch 2.0.3 Build 23101](https://us.forums.blizzard.com/en/warcraft3/t/patch-203-build-23101-is-now-live/37162) which increased the limit of different ground tiles to 64 but the cliff type limit is still 4 and still only 2 of them are rendered properly.
+* Allow setting water color per tile which would allow us to use more than one global water color per map.
 * Remove the limit of 5 hero abilities per hero.
 * Remove the limit of 4 abilities per item.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
@@ -244,7 +251,7 @@ native GetUnitMorphedTypeId takes unit whichUnit returns integer
 native IsUnitMorphed takes unit whichUnit returns boolean
 ```
 
-* Unit miss API:
+* Unit Miss API:
 
 ```jass
 native SetUnitMissChance takes unit whichUnit, integer percentage returns nothing
@@ -432,6 +439,22 @@ native SimError takes force whichForce, string messager returns nothing
 * Terrain API:
 
 ```jass
+native GetMapMaxTiles takes nothing returns integer
+native GetMapMaxCliffTypes takes nothing returns integer
+// Returns a raw code like Zdrt.
+native GetMapTile takes integer index returns integer
+native GetMapCliffType takes integer index returns integer
+
+native GetTerrainWaterColorRed takes real x, real y returns integer
+native GetTerrainWaterColorGreen takes real x, real y returns integer
+native GetTerrainWaterColorBlue takes real x, real y returns integer
+native SetTerrainWaterColorRed takes real x, real y, integer red returns nothing
+native SetTerrainWaterColorGreen takes real x, real y, integer green returns nothing
+native SetTerrainWaterColorBlue takes real x, real y, integer blue returns nothing
+
+native GetTerrainCliffType takes real x, real y returns integer
+native SetTerrainCliffType takes real x, real y, integer cliffType returns nothing
+
 type terrainspecifictype extends handle
 
 native ConvertTerrainSpecificType takes integer v returns terrainspecifictype
@@ -445,6 +468,9 @@ native SetTerrainSpecificType takes real x, real y, terrainspecifictype t return
 native GetTerrainSpecificType takes real x, real y returns terrainspecifictype
 
 native SetTerrainCliffLevel         takes real x, real y, integer cliffLevel returns nothing
+
+native GetTerrainHeight takes real x, real y returns real
+native SetTerrainHeight takes real x, real y, real height returns nothing
 ```
 
 * Illusions API:
