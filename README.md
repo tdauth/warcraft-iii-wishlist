@@ -19,7 +19,7 @@ Feel free to create issues and pull requests for this repository on GitHub.
 * Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
 * Initialization of `region` variables leads to crashing the game on saving it.
 * Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
-* Changing all ability object data fields via JASS should work.
+* Changing all ability object data fields via JASS should work ([BlzSetAbilityRealLevelField is not working](https://www.hiveworkshop.com/threads/blzsetabilityreallevelfield-is-not-working.339882/), [TasAbilityField Test](https://www.hiveworkshop.com/pastebin/b2769ab71109c3634b3115937deaa34a.24187)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_CANCEL` triggering when you click on the hero icon in the queue (current solution [HeroReviveCancelEvent v1.1](https://www.hiveworkshop.com/threads/herorevivecancelevent-v1-1.293491/)).
 * Fix event `EVENT_PLAYER_HERO_REVIVE_START` not triggering when the revival of a hero is cancelled.
 * Fix the function `GetTriggerUnit` returning the hero instead of the altar for event `EVENT_PLAYER_HERO_REVIVE_START` ([question](https://www.hiveworkshop.com/threads/getting-the-reviving-altar-for-event_unit_hero_revive_start.356746/)).
@@ -200,7 +200,7 @@ native BlzGetTechStringLevelField takes integer id, techstringlevelfield whichFi
 ```
 
 * Add an object data field for the ability Black Arrow which specifies the maximum target unit level. Currently, it is hard coded with the value of 5.
-* Hero ability API:
+* Hero Ability API:
 
 ```jass
 native SetHeroAbilityLevel takes unit hero, integer abilityId, integer level returns boolean
@@ -241,7 +241,7 @@ native UnitSetRevivalProgress takes unit whichUnit, integer constructionPercenta
 native UnitGetRevivalProgress takes unit whichUnit returns integer
 ```
 
-* Unit transformation/morph API:
+* Unit Transformation API:
 
 ```jass
 native MorphUnit takes unit whichUnit, integer newType, real duration returns nothing
@@ -284,6 +284,8 @@ EVENT_UNIT_DECAYED
 EVENT_UNIT_EXPLODED
 ```
 
+See [UnitEventEx](https://www.hiveworkshop.com/threads/uniteventex.306289/).
+
 * Buff API:
 
 ```jass
@@ -315,6 +317,7 @@ native SetMainSelectedUnit takes player whichUnit, unit u returns nothing
 
 This API would allow players to select more than 12 units at once.
 The UI would need some adaptions to show more than 12 unit icons at once.
+Currently, retrieving the main selected unit has to be done with this workaround: [GetMainSelectedUnit](https://www.hiveworkshop.com/threads/getmainselectedunit.325337).
 
 * Missile API which allows creating missiles manually.
 * Unit and item stock API which allows setting and getting the stock values for items from shops.
@@ -621,6 +624,17 @@ native SetUnitHarvestGold takes unit whichUnit, integer amount returns nothing
 native SetUnitHarvestLumber takes unit whichUnit, integer amount returns nothing
 ```
 
+* Target Flag API:
+
+
+```jass
+native IsDestructableTypeTarget takes integer id, targetflag t returns boolean
+native IsDestructableTarget takes destructable d, targetflag t returns boolean
+native SetDestructableTarget takes destructable d, targetflag t, boolean flag returns nothing
+```
+
+This API would allow detecting and changing trees.
+
 ## JassHelper
 
 * JassHelper changes the number of underscores for generated identifiers when saving the map. This will lead to bigger diffs in git than necessary and make it harder to see actual changes in the generated map scripts.
@@ -631,7 +645,3 @@ native SetUnitHarvestLumber takes unit whichUnit, integer amount returns nothing
 
 * [List of WarCraft III Crashes](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/)
 * [Request Features for JASS and the World Editor](https://www.hiveworkshop.com/threads/feedback-request-features-for-jass-and-the-world-editor.308099)
-* [UnitEventEx](https://www.hiveworkshop.com/threads/uniteventex.306289/)
-* [GetMainSelectedUnit](https://www.hiveworkshop.com/threads/getmainselectedunit.325337)
-* [BlzSetAbilityRealLevelField is not working](https://www.hiveworkshop.com/threads/blzsetabilityreallevelfield-is-not-working.339882/)
-* [TasAbilityField Test](https://www.hiveworkshop.com/pastebin/b2769ab71109c3634b3115937deaa34a.24187)
