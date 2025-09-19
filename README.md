@@ -49,7 +49,8 @@ rmvx
 * Add missing object data field types to common.j:
 
 ```jass
-constant abilityintegerlevelfield ABILITY_ILF_MAXIMUM_CREEP_LEVEL_NDO2     = ConvertAbilityIntegerLevelField('Ndo2')
+constant abilityintegerlevelfield ABILITY_ILF_MAXIMUM_CREEP_LEVEL_NDO4     = ConvertAbilityIntegerLevelField('Ndo4')
+constant abilityreallevelfield ABILITY_RLF_MOVEMENT_SPEED_NDO5     = ConvertAbilityRealLevelField('Ndo5')
 ```
 
 ## Features
