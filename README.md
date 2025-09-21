@@ -51,6 +51,11 @@ rmvx
 ```jass
 constant abilityintegerlevelfield ABILITY_ILF_MAXIMUM_CREEP_LEVEL_NDO4     = ConvertAbilityIntegerLevelField('Ndo4')
 constant abilityreallevelfield ABILITY_RLF_MOVEMENT_SPEED_NDO5     = ConvertAbilityRealLevelField('Ndo5')
+constant abilityreallevelfield ABILITY_RLF_MAXIMUM_DAMAGE_UFN5     = ConvertAbilityRealLevelField('Ufn5')
+constant itemintegerfield ITEM_IF_MAX_STACKS                = ConvertItemIntegerField('ista')
+constant abilitystringfield ABILITY_SF_RESEARCH_HOTKEY     = ConvertAbilityStringField('arhk')
+constant abilitystringfield ABILITY_SF_HOTKEY     = ConvertAbilityStringField('ahky')
+constant abilitystringfield ABILITY_SF_UNHOTKEY     = ConvertAbilityStringField('auhk')
 ```
 
 ## Features
