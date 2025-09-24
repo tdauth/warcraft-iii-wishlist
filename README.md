@@ -45,7 +45,6 @@ rmvx
 * Fix changing unit icons when changing their skin with `BlzSetUnitSkin`. At the moment you have to change the owner of the unit to fix the icon.
 * `SetTerrainTypeBJ` has no effect if Reforged graphics are enabled ([source](https://github.com/tdauth/warcraft-iii-wishlist/issues/4)).
 * Fix SLK and TXT files being able to handle abilities and upgrades with more than 4 levels ([source](https://www.hiveworkshop.com/threads/abilitydata-slk-help.268472/#post-2715115)).
-
 * Add missing object data field types to common.j:
 
 ```jass
@@ -57,6 +56,16 @@ constant abilitystringfield ABILITY_SF_RESEARCH_HOTKEY     = ConvertAbilityStrin
 constant abilitystringfield ABILITY_SF_HOTKEY     = ConvertAbilityStringField('ahky')
 constant abilitystringfield ABILITY_SF_UNHOTKEY     = ConvertAbilityStringField('auhk')
 ```
+
+* The curse change to miss field is shown as 'Crs' in object editor but in common.j as:
+
+```jass
+constant abilityreallevelfield ABILITY_RLF_CHANCE_TO_MISS_CRS                                = ConvertAbilityRealLevelField('Crs1')
+```
+
+Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads/list-of-non-working-object-data-constants.317769/#post-3368583).
+
+* Removing the ability 'Agld' from Gold Mines and adding it during the map initialization will prevent AI from ever using the Gold Mine. This is one way to disable gold mine minimap icons since there is no object editor field for it. Add a field to disable it or fix this bug ([source](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/page-4#post-3693638)).
 
 ## Features
 
