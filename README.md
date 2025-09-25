@@ -55,6 +55,7 @@ constant itemintegerfield ITEM_IF_MAX_STACKS                = ConvertItemInteger
 constant abilitystringfield ABILITY_SF_RESEARCH_HOTKEY     = ConvertAbilityStringField('arhk')
 constant abilitystringfield ABILITY_SF_HOTKEY     = ConvertAbilityStringField('ahky')
 constant abilitystringfield ABILITY_SF_UNHOTKEY     = ConvertAbilityStringField('auhk')
+constant unitbooleanfield UNIT_BF_CAMPAIGN                              = ConvertUnitBooleanField('ucam')
 ```
 
 * The curse change to miss field is shown as 'Crs' in object editor but in common.j as:
