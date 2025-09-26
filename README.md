@@ -100,8 +100,16 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow setting water color per tile which would allow us to use more than one global water color per map.
 * Remove the limit of 5 hero abilities per hero.
 * Remove the limit of 4 abilities per item.
+* Allow adding custom order IDs with their corresponding order strings to avoid conflicts with exisiting orders.
+* Show the remaining duration of buffs in their tooltips.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
-* Allow sharing/unsharing control with single units.
+* Allow sharing/unsharing control with single units:
+
+```jass
+native ShareUnitControl takes unit whichUnit, player whichPlayer, boolean share returns nothing
+native IsUnitControlShared takes unit whichUnit, player whichPlayer returns boolean
+```
+
 * Allow loading custom SLK and TXT files per map even when clicking on the map in the lobby. This would allow defining custom object data not based on default object data but with complete custom IDs and strings there instead of the war3map.wts files or even complete object data sets. There could be a special file which is called war3mapLoadFiles.txt which contains user defined entries like
 
 ```
@@ -132,6 +140,7 @@ Name=TRIGSTR_1171
 ```
 
 * Allow rotation of buildings including their pathing, ground and shadow textures.
+* Allow choosing colors for players in the lobby and not use a fixed color per slot. The map settings should define which colors can be choosen for every player slot.
 * Add sight blockers for flying units. Currently, the occlusion height will only work for ground units.
 * Show Destructible HP on selection by setting a boolean flag in the object editor.
 * New boolean flag for unit types to enable hero glow.
