@@ -70,6 +70,7 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 
 ## Features
 
+* Release alpha versions of Warcraft III. There is plenty of footage and documentation of the alpha versions of Warcraft III which had different models, units, heroes, abilities and a Demon race. Releasing these resources would help modders to improve their maps.
 * Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
 
 ```jass
@@ -220,6 +221,15 @@ type techstringlevelfield extends handle
 constant techstringlevelfield TECH_SF_LEVEL_ICON = ConvertTechStringLevelField('gar1')
 
 native BlzGetTechStringLevelField takes integer id, techstringlevelfield whichField, integer level returns string
+
+native BlzGetUnitTooltip takes integer id returns string
+native BlzSetUnitTooltip takes integer id, string tooltip returns nothing
+native BlzGetUnitExtendedTooltip takes integer id returns string
+native BlzSetUnitExtendedTooltip takes integer id, string tooltip returns nothing
+native BlzGetUnitReviveTooltip takes integer id returns string
+native BlzSetUnitReviveTooltip takes integer id, string tooltip returns nothing
+native BlzGetUnitAwakeTooltip takes integer id returns string
+natuve BlzSetUnitAwakeTooltip takes integer id, string tooltip returns nothing
 
 // Allow access and changes of all build time fields (object editor). They aren't listed in the trigger actions etc.
 ```
@@ -650,7 +660,6 @@ native SetUnitHarvestLumber takes unit whichUnit, integer amount returns nothing
 ```
 
 * Target Flag API:
-
 
 ```jass
 native IsDestructableTypeTarget takes integer id, targetflag t returns boolean
