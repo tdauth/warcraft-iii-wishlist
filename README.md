@@ -52,6 +52,8 @@ constant abilityintegerlevelfield ABILITY_ILF_MAXIMUM_CREEP_LEVEL_NDO4     = Con
 constant abilityreallevelfield ABILITY_RLF_MOVEMENT_SPEED_NDO5     = ConvertAbilityRealLevelField('Ndo5')
 constant abilityreallevelfield ABILITY_RLF_MAXIMUM_DAMAGE_UFN5     = ConvertAbilityRealLevelField('Ufn5')
 constant itemintegerfield ITEM_IF_MAX_STACKS                = ConvertItemIntegerField('ista')
+constant itemintegerfield ITEM_IF_GOLD_COST                = ConvertItemIntegerField('igol')
+constant itemintegerfield ITEM_IF_LUMBER_COST                = ConvertItemIntegerField('ilum')
 constant abilitystringfield ABILITY_SF_RESEARCH_HOTKEY     = ConvertAbilityStringField('arhk')
 constant abilitystringfield ABILITY_SF_HOTKEY     = ConvertAbilityStringField('ahky')
 constant abilitystringfield ABILITY_SF_UNHOTKEY     = ConvertAbilityStringField('auhk')
@@ -67,6 +69,7 @@ constant abilityreallevelfield ABILITY_RLF_CHANCE_TO_MISS_CRS                   
 Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads/list-of-non-working-object-data-constants.317769/#post-3368583).
 
 * Removing the ability 'Agld' from Gold Mines and adding it during the map initialization will prevent AI from ever using the Gold Mine. This is one way to disable gold mine minimap icons since there is no object editor field for it. Add a field to disable it or fix this bug ([source](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/page-4#post-3693638)).
+* Unit types do not allow using object data fields in tooltips like `STR`, `AGI` and `INT`. Allow refering all different object data fields in all kinds of tooltips ([source](https://www.hiveworkshop.com/threads/incorrect-values-in-tooltips.104118/)).
 
 ## Features
 
