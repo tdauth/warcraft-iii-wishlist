@@ -15,6 +15,7 @@ Feel free to create issues and pull requests for this repository on GitHub.
 
 ## Bug Fixes
 
+* Fix natives from common.j being used in common.ai file and AI scripts. For example, `I2S` cannot be used and `GetLocalizedString` leads to "(null)" ([source](https://www.hiveworkshop.com/threads/i2s-without-natives-for-use-in-ai-scripts.348472/)).
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
 * Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
 * Initialization of `region` variables leads to crashing the game on saving it.
