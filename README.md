@@ -74,6 +74,7 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 
 ## Features
 
+* Native Linux support including the Battle.net app, the game itself and the World Editor. External tools like JassHelper could still be run with some kind of emulator if they only exist for Windows.
 * Release alpha versions of Warcraft III. There is plenty of footage and documentation of the alpha versions of Warcraft III which had different models, units, heroes, abilities and a Demon race. Releasing these resources would help modders to improve their maps.
 * Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
 
