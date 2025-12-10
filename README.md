@@ -17,6 +17,7 @@ Feel free to create issues and pull requests for this repository on GitHub.
 
 * Fix natives from common.j being used in common.ai file and AI scripts. For example, `I2S` cannot be used and `GetLocalizedString` leads to "(null)" ([source](https://www.hiveworkshop.com/threads/i2s-without-natives-for-use-in-ai-scripts.348472/)).
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
+* Strings longer than 1023 characters stored in JASS code will lead to crashes when loading save games ([source](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/page-4#post-3637812)). This can also happen if a such a string is loaded with `GetLocalizedString` and stored in JASS.
 * Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
 * Initialization of `region` variables leads to crashing the game on saving it.
 * Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
