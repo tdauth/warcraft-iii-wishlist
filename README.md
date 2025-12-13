@@ -75,6 +75,8 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 ## Features
 
 * Release alpha versions of Warcraft III. There is plenty of footage and documentation of the alpha versions of Warcraft III which had different models, units, heroes, abilities and a Demon race. Releasing these resources would help modders to improve their maps.
+* Make downloading Reforged/HD content optional when installing the game. Manye players just want to use the SD content. The original game Warcraft III: The Frozen Throne was less than 2 GiBytes in size. This would massively speed up the time for installing and updating the game and it would require less space on disks.
+* Allow changing the language ingame. Modern games allow this. Warcraft requires the game to be restarted.
 * Allow joining players during a started game. Games could run like servers and allow joining/leaving at any time:
 
 ```jass
