@@ -17,6 +17,7 @@ Feel free to create issues and pull requests for this repository on GitHub.
 
 * Fix natives from common.j being used in common.ai file and AI scripts. For example, `I2S` cannot be used and `GetLocalizedString` leads to "(null)" ([source](https://www.hiveworkshop.com/threads/i2s-without-natives-for-use-in-ai-scripts.348472/)).
 * framehandles get invalid in save games and have to be recreated manually after loading a game. Accessing the old ones will crash the game.
+* Strings longer than 1023 characters stored in JASS code will lead to crashes when loading save games ([source](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/page-4#post-3637812)). This can also happen if a such a string is loaded with `GetLocalizedString` and stored in JASS.
 * Render more than 2 different cliff types: Even with more different cliff types only the first 2 are rendered. The others are rendered as one of the first ones.
 * Initialization of `region` variables leads to crashing the game on saving it.
 * Ability `Agyd` (Create Corpse) is enabled even without the required dependencies in `areq`.
@@ -74,6 +75,7 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 
 ## Features
 
+* Native Linux support including the Battle.net app, the game itself and the World Editor. External tools like JassHelper could still be run with some kind of emulator if they only exist for Windows.
 * Release alpha versions of Warcraft III. There is plenty of footage and documentation of the alpha versions of Warcraft III which had different models, units, heroes, abilities and a Demon race. Releasing these resources would help modders to improve their maps.
 * Make downloading Reforged/HD content optional when installing the game. Manye players just want to use the SD content. The original game Warcraft III: The Frozen Throne was less than 2 GiBytes in size. This would massively speed up the time for installing and updating the game and it would require less space on disks.
 * Allow changing the language ingame. Modern games allow this. Warcraft requires the game to be restarted.
