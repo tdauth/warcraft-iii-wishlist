@@ -178,6 +178,8 @@ CustomScript1=scripts/mycustomscript2.j
 * Health bar for destructables in Reforged like it used to be in Frozen Throne.
 * The Channel ability should get an option to be auto cast or not. This would help to create custom auto cast spells.
 * Let raw code object IDs like `'hfot'` be longer than 4 letters to make them more expressive: `'footman'`.
+* Show some warning when removing used assets in World Editor. Check if icons, models etc. are used in object data, UI data etc. and warn the user before moving it.
+* Add World Editor action to list unused assets by checking object data, UI data etc.
 * Support multiple game versions by version checks at runtime:
 
 ```jass
