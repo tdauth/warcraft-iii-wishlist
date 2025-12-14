@@ -72,6 +72,7 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 
 * Removing the ability 'Agld' from Gold Mines and adding it during the map initialization will prevent AI from ever using the Gold Mine. This is one way to disable gold mine minimap icons since there is no object editor field for it. Add a field to disable it or fix this bug ([source](https://www.hiveworkshop.com/threads/list-of-warcraft-iii-crashes.194706/page-4#post-3693638)).
 * Unit types do not allow using object data fields in tooltips like `STR`, `AGI` and `INT`. Allow refering all different object data fields in all kinds of tooltips ([source](https://www.hiveworkshop.com/threads/incorrect-values-in-tooltips.104118/)).
+* Fix empty ability name of Critical Strike (Neutral Hostile) with ability ID 'ACss'.
 
 ## Features
 
