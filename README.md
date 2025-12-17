@@ -113,6 +113,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow setting water color per tile which would allow us to use more than one global water color per map.
 * Remove the limit of 5 hero abilities per hero.
 * Remove the limit of 4 abilities per item.
+* Remove the limit of 12 selectable units at once per player (see Selection Group API below).
 * Allow adding custom order IDs with their corresponding order strings to avoid conflicts with exisiting orders.
 * Show the remaining duration of buffs in their tooltips.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
