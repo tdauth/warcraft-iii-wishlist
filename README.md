@@ -185,6 +185,7 @@ CustomScript1=scripts/mycustomscript2.j
 * Let raw code object IDs like `'hfot'` be longer than 4 letters to make them more expressive: `'footman'`.
 * Show some warning when removing used assets in World Editor. Check if icons, models etc. are used in object data, UI data etc. and warn the user before moving it.
 * Add World Editor action to list unused assets by checking object data, UI data etc.
+* Add integrated native syntax highlighting, auto completion for trigger scripts including all scripting languages like JASS, vJass, LUA etc. like the external tool [TESH](https://www.hiveworkshop.com/threads/a-new-tesh-syntax-highlighter-for-warcraft-3.246081/). The auto completion should always use the actual used common.j, common.ai and Blizzard.j scripts which are used in the map. For example, if the map has imported those files, it should use them instead of the ones by Warcraft III itself.
 * Support multiple game versions by version checks at runtime:
 
 ```jass
