@@ -41,7 +41,7 @@ rmvx
 * war3mapMisc.txt entries like TWN1 cannot use translatable strings.
 * Starfall buff effect cannot be changed ([source](https://www.hiveworkshop.com/threads/starfall-effect-not-changing.332390/)).
 * Fix dependency equivalents using the same object data ID lead to crashes when buildings training them are selected. The crash is probably caused by some endless loop.
-* Fix crashes and performance issues with pathing in big maps ([source](https://www.hiveworkshop.com/threads/suicideonplayer-crashes-the-game-on-reforged-only-on-some-maps.359199/)).
+* Fix `GetExpansionPeon` returning null, random crashes when calling `SuicideOnPlayer` in AI scripts and performance issues with pathing in big maps larger than 224x224 ([source](https://www.hiveworkshop.com/threads/suicideonplayer-crashes-the-game-on-reforged-only-on-some-maps.359199/), [source 2](https://us.forums.blizzard.com/en/warcraft3/t/ai-scripts-on-maps-larger-than-224-crash-the-game/35118)).
 * Fix automatic deselections in multiplayer which might occur when selected unit groups are determined in trigger conditions ([source](https://www.hiveworkshop.com/threads/selection-bug.312500/)).
 * Fix summon event for ability Pocket Factory ([source](https://www.hiveworkshop.com/threads/how-do-you-detect-a-pocket-factory-summon.330032/)). Summoned Pocket Factories and Clockwerk Goblins are not detected by the summon event.
 * Fix changing unit icons when changing their skin with `BlzSetUnitSkin`. At the moment you have to change the owner of the unit to fix the icon.
