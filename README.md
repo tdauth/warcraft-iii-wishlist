@@ -75,6 +75,7 @@ Changing it via JASS does not work [source](https://www.hiveworkshop.com/threads
 * Fix empty ability name of Shadow Strike (Neutral Hostile) with ability ID 'ACss'.
 * Close color codes in tooltips with |r like for the unit Dragon Turtle 'nhyc'.
 * Clicking on map folders when creating a game lobby is really slow in the new Reforged UI.
+* Resizing the map boundaries in World Editor might crash ([source](https://us.forums.blizzard.com/en/warcraft3/t/world-editor-crashes-every-time-i-try-to-resize-a-map/)).
 
 ## Features
 
@@ -691,6 +692,7 @@ This API would allow detecting and changing trees.
 * JassHelper changes the number of underscores for generated identifiers when saving the map. This will lead to bigger diffs in git than necessary and make it harder to see actual changes in the generated map scripts.
 * JassHelper does not remove empty lines between static ifs which are false which makes the generated map script longer than necessary.
 * JassHelper should have an option to not generated JASS comments into the generated map script to keep it smaller.
+* `C:\Program Files (x86)\Warcraft III\_retail_\x86_64\JassHelper\jasshelper.conf` file is automatically reset by the Battle.net app which is quite annoying.
 
 ## Sources
 
