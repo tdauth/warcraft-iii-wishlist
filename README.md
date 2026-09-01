@@ -578,6 +578,18 @@ native SetRallyPointModel takes string model returns nothing
 native SetRallyPointTexture takes string texture returns nothing
 ```
 
+* Quest API:
+
+```jass
+native QuestGetTitle takes quest whichQuest returns string
+native QuestGetDescription takes quest whichQuest returns string
+native QuestGetIconPath takes quest whichQuest returns string
+native QuestGetItemCount takes quest whichQuest returns integer
+native QuestGetItem takes quest whichQuest, integer index returns questitem
+native QuestItemGetDescription  takes questitem whichQuestItem returns string
+native DestroyQuestItem takes questitem whichQuestItem returns nothing
+```
+
 * Multiboard API:
 
 ```jass
