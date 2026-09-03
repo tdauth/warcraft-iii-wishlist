@@ -392,6 +392,9 @@ constant native GetRestoredDestructableLife takes nothing returns real
 native TriggerRegisterDestructableEvent takes trigger whichTrigger, destructable d, destructableevent e returns nothing
 native TriggerRegisterAnyDestructableEvent takes trigger whichTrigger, destructableevent e returns nothing
 
+// This one can be reconstructed already and there is EnumDestructablesInCircleBJ but a native would be quite useful.
+native EnumDestructablesInRange takes real x, real y, real radius, boolexpr filter, code actionFunc returns nothing
+
 // some useful natives
 native SetDestructableFace takes destructable d, real face returns nothing
 native GetDestructableFace takes destructable d returns real
