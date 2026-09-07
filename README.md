@@ -339,6 +339,12 @@ EVENT_UNIT_EXPLODED
 
 See [UnitEventEx](https://www.hiveworkshop.com/threads/uniteventex.306289/).
 
+* Unit removal detection. Currently, there are lots of differnt unit indexer systems out there which give units unique indices and detect the unit removal from the game using some dummy ability and order detection. There should be a native event to detect unit removals with `RemoveUnit` (also from BJ functions like `ReplaceUnitBJ`):
+
+```jass
+constant playerunitevent EVENT_PLAYER_UNIT_REMOVED                   = ConvertPlayerUnitEvent(xxx) // GetTriggerUnit refers to the removed unit.
+```
+
 * Buff API:
 
 ```jass
