@@ -62,6 +62,8 @@ constant abilitystringfield ABILITY_SF_UNHOTKEY     = ConvertAbilityStringField(
 constant unitbooleanfield UNIT_BF_CAMPAIGN                              = ConvertUnitBooleanField('ucam')
 ```
 
+For the expansion Forsaken Kingdom all of the ability fields of the new abilities are still missing from common.j.
+
 * The curse change to miss field is shown as 'Crs' in object editor but in common.j as:
 
 ```jass
@@ -114,7 +116,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow setting water color per tile which would allow us to use more than one global water color per map.
 * Remove the limit of 5 hero abilities per hero.
 * Remove the limit of 4 abilities per item.
-* Remove the limit of 12 selectable units at once per player (see Selection Group API below).
+* ~Remove the limit of 12 selectable units at once per player (see Selection Group API below).~ The expansion Forsaken Kingdom increased this limit to 24 but it is still fixed and cannot be configured or increased even further.
 * Allow adding custom order IDs with their corresponding order strings to avoid conflicts with exisiting orders.
 * Show the remaining duration of buffs in their tooltips.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
@@ -141,6 +143,8 @@ native LoadSlk takes string filePath returns boolean
 native HasFile takes string filePath returns boolean
 native HasDir takes string dirPath returns boolean
 ```
+
+Note that this could lead to desyncs if players do not have the same files but so does the game if players have different versions of the files in the game.
 
 * More object data types based on game SLK files: unit sound sets, weather effects, lightnings, ubersplats, water etc.
 * Object data without level-specific data: Allow setting one single value for every level for abilities and researches to avoid big object data files with high levels. This could be controlled with a boolean flag per ability/research. It would massively improve the map loading times.
@@ -186,6 +190,7 @@ CustomScript1=scripts/mycustomscript2.j
 * Let raw code object IDs like `'hfot'` be longer than 4 letters to make them more expressive: `'footman'`.
 * Show some warning when removing used assets in World Editor. Check if icons, models etc. are used in object data, UI data etc. and warn the user before moving it.
 * Add World Editor action to list unused assets by checking object data, UI data etc.
+* Generating the shadow file `war3map.shd` for your map in World Editor can take a long time. Make the process much faster. The generated shadows are still used for SD graphics.
 * Add integrated native syntax highlighting, auto completion for trigger scripts including all scripting languages like JASS, vJass, LUA etc. like the external tool [TESH](https://www.hiveworkshop.com/threads/a-new-tesh-syntax-highlighter-for-warcraft-3.246081/). The auto completion should always use the actual used common.j, common.ai and Blizzard.j scripts which are used in the map. For example, if the map has imported those files, it should use them instead of the ones by Warcraft III itself.
 * Support multiple game versions by version checks at runtime:
 
