@@ -1,6 +1,6 @@
 # Warcraft III Wishlist
 
-Wishlist for the game Warcraft III: Reforged.
+Wishlist for the game Warcraft III: Reforged and its expansions.
 
 ## Motivation
 
