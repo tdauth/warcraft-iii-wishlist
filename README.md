@@ -257,7 +257,7 @@ natuve BlzSetUnitAwakeTooltip takes integer id, string tooltip returns nothing
 // Allow access and changes of all build time fields (object editor). They aren't listed in the trigger actions etc.
 ```
 
-* Add an object data field for the ability Black Arrow which specifies the maximum target unit level. Currently, it is hard coded with the value of 5.
+* Use the object data field `Pos1` (`ABILITY_ILF_MAXIMUM_CREEP_LEVEL_POS1`) for the ability Black Arrow which specifies the maximum target unit level. Currently, it is hard coded with the value of 5.
 * Hero Ability API:
 
 ```jass
