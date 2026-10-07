@@ -120,6 +120,7 @@ native  SaveGameCacheSync    takes player whichPlayer, gamecache whichCache retu
 * Allow adding custom order IDs with their corresponding order strings to avoid conflicts with exisiting orders.
 * Show the remaining duration of buffs in their tooltips.
 * Paged command buttons: Allow adding more than 16 unit/item types/abilities etc. to list fields and more than 6 items per inventory and add page buttons to change the currently displayed buttons/item icons.
+* More than 12 command buttons and more than 6 inventory item slots etc. This limit could be configured per unit or globally in the gameplay constants.
 * Allow sharing/unsharing control with single units:
 
 ```jass
